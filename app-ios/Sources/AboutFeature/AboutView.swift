@@ -18,8 +18,20 @@ public struct AboutEnvironment {
     public init() {}
 }
 
-public let aboutReducer = Reducer<AboutState, AboutAction, AboutEnvironment> { _, _, _ in
-    return .none
+public let aboutReducer = Reducer<AboutState, AboutAction, AboutEnvironment> { _, action, _ in
+    switch action {
+    case .openAccess:
+        return .none
+    case .openStaffs:
+        return .none
+    case .openPrivacyPolicy:
+        if let url = URL(string: "https://portal.droidkaigi.jp/about/privacy") {
+            UIApplication.shared.open(url)
+        }
+        return .none
+    case .openLicense:
+        return .none
+    }
 }
 
 public struct AboutView: View {
